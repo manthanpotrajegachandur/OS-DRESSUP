@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Outfit Studio</title>
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+  <!-- NAVBAR -->
+
+  <header class="navbar">
+
+    <div class="brand">
+
+      <div class="brand-logo">OS</div>
+
+      <div>
+        <h1>Outfit Studio</h1>
+        <p>Personal styling, simplified.</p>
+      </div>
+
+    </div>
+
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      Wardrobe ready
+    </div>
+
+  </header>
+
+
+  <main class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          YOUR PERSONAL WARDROBE
+        </div>
+
+        <h2>
+          Dress better.<br>
+          <span>Every day.</span>
+        </h2>
+
+        <p>
+          Add the clothes you already own and create
+          complete outfits in seconds.
+        </p>
+
+        <div class="hero-actions">
+
+          <button
+            class="primary-button"
+            id="generateBtn"
+          >
+            Generate Outfit
+          </button>
+
+          <button
+            class="ghost-button"
+            id="heroAddBtn"
+          >
+            Add Clothes
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-preview">
+
+        <div class="preview-label">
+          TODAY'S STYLE
+        </div>
+
+        <div class="style-card">
+
+          <div class="style-circle">
+            OS
+          </div>
+
+          <div>
+            <strong>Your wardrobe</strong>
+            <p>Ready for your first look</p>
+          </div>
+
+        </div>
+
+        <div class="preview-line"></div>
+
+        <div class="mini-stats">
+
+          <div>
+            <strong id="heroClothes">0</strong>
+            <span>Items</span>
+          </div>
+
+          <div>
+            <strong id="heroOutfits">0</strong>
+            <span>Outfits</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+      <div class="stat-card">
+
+        <span>WARDROBE</span>
+
+        <strong id="clothesCount">0</strong>
+
+        <p>Clothing items</p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <span>SAVED LOOKS</span>
+
+        <strong id="outfitCount">0</strong>
+
+        <p>Outfits saved</p>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <span>STYLE</span>
+
+        <strong id="styleStatus">NEW</strong>
+
+        <p>Your style profile</p>
+
+      </div>
+
+    </section>
+
+
+    <!-- WARDROBE -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="eyebrow">
+            YOUR CLOSET
+          </div>
+
+          <h3>My Wardrobe</h3>
+
+        </div>
+
+
+        <button
+          class="add-button"
+          id="addClothesBtn"
+        >
+          <span>+</span>
+          Add Clothes
+        </button>
+
+      </div>
+
+
+      <div
+        id="wardrobe"
+        class="wardrobe"
+      ></div>
+
+    </section>
+
+
+    <!-- GENERATED OUTFIT -->
+
+    <section
+      id="outfitSection"
+      class="section hidden"
+    >
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="eyebrow">
+            YOUR LOOK
+          </div>
+
+          <h3>Generated Outfit</h3>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="generatedOutfit"
+        class="generated-outfit"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ADD CLOTHES METHOD MODAL -->
+
+  <div
+    id="methodModal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box method-box">
+
+      <button
+        class="modal-close"
+        id="closeMethod"
+      >
+        ×
+      </button>
+
+
+      <div class="modal-eyebrow">
+        ADD TO WARDROBE
+      </div>
+
+      <h2>How would you like to add it?</h2>
+
+      <p class="modal-description">
+        Choose a photo from your device or take a new one.
+      </p>
+
+
+      <div class="photo-options">
+
+        <button
+          class="photo-option"
+          id="galleryBtn"
+        >
+
+          <div class="option-icon">
+            +
+          </div>
+
+          <div>
+            <strong>Gallery / Files</strong>
+            <span>Choose an existing photo</span>
+          </div>
+
+        </button>
+
+
+        <button
+          class="photo-option"
+          id="cameraBtn"
+        >
+
+          <div class="option-icon camera-icon">
+            ●
+          </div>
+
+          <div>
+            <strong>Camera</strong>
+            <span>Take a new photo</span>
+          </div>
+
+        </button>
+
+      </div>
+
+
+      <button
+        class="cancel-button"
+        id="cancelMethod"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- HIDDEN FILE INPUTS -->
+
+  <input
+    type="file"
+    id="galleryInput"
+    accept="image/*"
+    hidden
+  >
+
+  <input
+    type="file"
+    id="cameraInput"
+    accept="image/*"
+    capture="environment"
+    hidden
+  >
+
+
+  <!-- CLOTHING DETAILS MODAL -->
+
+  <div
+    id="detailsModal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box details-box">
+
+      <button
+        class="modal-close"
+        id="closeDetails"
+      >
+        ×
+      </button>
+
+
+      <div class="modal-eyebrow">
+        NEW WARDROBE ITEM
+      </div>
+
+      <h2>Add clothing</h2>
+
+
+      <div
+        id="imagePreview"
+        class="image-preview"
+      >
+
+        <img
+          id="previewImage"
+          src=""
+          alt="Clothing preview"
+        >
+
+      </div>
+
+
+      <form id="clothesForm">
+
+        <label>
+          Clothing name
+
+          <input
+            id="clothingName"
+            type="text"
+            placeholder="Black oversized T-shirt"
+            required
+          >
+
+        </label>
+
+
+        <label>
+          Category
+
+          <select
+            id="category"
+            required
+          >
+
+            <option value="">
+              Select category
+            </option>
+
+            <option value="top">
+              T-shirt / Shirt
+            </option>
+
+            <option value="bottom">
+              Jeans / Pants
+            </option>
+
+            <option value="shoes">
+              Shoes
+            </option>
+
+            <option value="outerwear">
+              Jacket / Hoodie
+            </option>
+
+          </select>
+
+        </label>
+
+
+        <div class="form-row">
+
+          <label>
+
+            Color
+
+            <select
+              id="color"
+              required
+            >
+
+              <option value="">
+                Color
+              </option>
+
+              <option>Black</option>
+              <option>White</option>
+              <option>Blue</option>
+              <option>Red</option>
+              <option>Green</option>
+              <option>Grey</option>
+              <option>Brown</option>
+              <option>Beige</option>
+              <option>Other</option>
+
+            </select>
+
+          </label>
+
+
+          <label>
+
+            Style
+
+            <select
+              id="style"
+              required
+            >
+
+              <option value="">
+                Style
+              </option>
+
+              <option>Casual</option>
+              <option>Formal</option>
+              <option>Streetwear</option>
+              <option>Sporty</option>
+
+            </select>
+
+          </label>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="save-button"
+        >
+          Add to Wardrobe
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <script src="./app.js"></script>
+
+</body>
+</html>
